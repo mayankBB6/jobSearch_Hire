@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Job</title>
+    <style>
+        /* General Reset and Body Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: #333333;
+        }
+
+        /* Container Styling */
+        .container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Heading Styling */
+        h1 {
+            font-size: 1.8em;
+            color: #222222;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            font-weight: 500;
+            color: #555555;
+            text-align: left;
+            font-size: 0.95em;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #dddddd;
+            border-radius: 6px;
+            font-size: 0.95em;
+            background-color: #fafafa;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #333333;
+            background-color: #ffffff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button[type="submit"] {
+            background-color: #333333;
+            color: #ffffff;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #111111;
+        }
+
+        /* Back to Home Button */
+        .button-container {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-container a {
+            text-decoration: none;
+            background-color: #333333;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .button-container a:hover {
+            background-color: #111111;
+        }
+
+        /* Job List Styling */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+
+        .job-item {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .job-details {
+            display: none;
+            background-color: #ffffff;
+            padding: 1rem;
+            border-top: 1px solid #e0e0e0;
+            border-radius: 5px;
+            margin-top: 0.8rem;
+        }
+
+        .show-details .job-details {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add a Job</h1>
+
+        <!-- Job form connects to database -->
+        <form method="post" action="connect.php">
+            <label for="title">Job Title:</label>
+            <input type="text" id="title" name="title" required placeholder="e.g., Store Associate">
+        
+            <label for="description">Job Description:</label>
+            <textarea id="description" name="description" required placeholder="Describe the job responsibilities..."></textarea>
+        
+            <label for="salary">Salary (by the hour):</label>
+            <input type="text" id="salary" name="salary" required placeholder="e.g., $15/hour">
+        
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required placeholder="e.g., Store name">
+        
+            <button type="submit">Add Job</button>
+        </form>
+        
+
+        <!-- Back to Home button -->
+        <div class="button-container">
+            <a href="index.html">Back to Home</a>
+        </div>
+    </div>
+
+    <ul>
+        <!-- Check if there are any jobs in the database to display -->
+        
+                <li class="job-item" onclick="toggleDetails(event)">
+                    <strong>{{ job['title'] }}</strong>
+                    <div class="job-details">
+                        <p><strong>Description:</strong> {{ job['description'] }}</p>
+                        <p><strong>Salary:</strong> {{ job['salary'] }}</p>
+                        <p><strong>Location:</strong> {{ job['location'] }}</p>
+                    </div>
+                </li>
+            
+            <!-- Message when no jobs are available -->
+            
+
+        <!-- Default job items (static) -->
+        <li class="job-item" onclick="toggleDetails(event)">
+            <strong>Retail Associate</strong>
+            <div class="job-details">
+                <p><strong>Description:</strong> Assist customers, stock shelves, and organize displays in a retail setting.</p>
+                <p><strong>Salary:</strong> $15/hour</p>
+                <p><strong>Location:</strong> Autozone</p>
+            </div>
+        </li>
+        <li class="job-item" onclick="toggleDetails(event)">
+            <strong>Fast Food Crew Member</strong>
+            <div class="job-details">
+                <p><strong>Description:</strong> Take customer orders, prepare food, and maintain cleanliness in a fast-food restaurant.</p>
+                <p><strong>Salary:</strong> $15/hour</p>
+                <p><strong>Location:</strong> Burger King</p>
+            </div>
+        </li>
+        <li class="job-item" onclick="toggleDetails(event)">
+            <strong>Lifeguard</strong>
+            <div class="job-details">
+                <p><strong>Description:</strong> Ensure the safety of swimmers, enforce pool rules, and provide emergency response if needed.</p>
+                <p><strong>Salary:</strong> $17/hour</p>
+                <p><strong>Location:</strong> YMCA</p>
+            </div>
+        </li>
+        <li class="job-item" onclick="toggleDetails(event)">
+            <strong>Librarian</strong>
+            <div class="job-details">
+                <p><strong>Description:</strong> Assist customers, stock shelves, and organize displays in a retail setting.</p>
+                <p><strong>Salary:</strong> $12/hour</p>
+                <p><strong>Location:</strong> Frederick County Public Library</p>
+            </div>
+        </li>
+    </ul>
+
+    <script>
+        function toggleDetails(event) {
+            const jobItem = event.currentTarget;
+            jobItem.classList.toggle("show-details");
+        }
+    </script>
+</body>
+</html>

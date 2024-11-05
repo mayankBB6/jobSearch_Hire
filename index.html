@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker</title>
+    <style>
+        /* Existing CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 2em;
+            color: #333333;
+            margin-bottom: 1rem;
+        }
+        .button-container {
+            margin-bottom: 1.5rem;
+        }
+        .button-container a {
+            text-decoration: none;
+            background-color: #0066cc;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 0 0.5rem;
+            display: inline-block;
+        }
+        .button-container a:hover {
+            background-color: #004999;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .job-item {
+            background-color: #e9f5ff;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+        }
+        .job-details {
+            display: none;
+            background-color: #f0f8ff;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            border-top: 1px solid #cceeff;
+            border-radius: 5px;
+        }
+        .job-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 102, 204, 0.2);
+        }
+        .show-details .job-details {
+            display: block;
+        }
+    </style>
+    <script>
+        function toggleDetails(event) {
+            const jobItem = event.currentTarget;
+            jobItem.classList.toggle("show-details");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Job Tracker</h1>
+
+        <!-- Button container for Add Job and Search Job pages -->
+        <div class="button-container">
+            <a href="addJob.html">Add a Job</a>
+            <a href="searchJob.html">Search Jobs</a>
+        </div>
+
+        <h2>All Jobs</h2>
+
+        <ul>
+            <!-- Check if there are any jobs in the database to display -->
+            
+                    <li class="job-item" onclick="toggleDetails(event)">
+                        <strong>{{ job['title'] }}</strong>
+                        <div class="job-details">
+                            <p><strong>Description:</strong> {{ job['description'] }}</p>
+                            <p><strong>Salary:</strong> {{ job['salary'] }}</p>
+                            <p><strong>Location:</strong> {{ job['location'] }}</p>
+                        </div>
+                    </li>
+                
+                <!-- Message when no jobs are available -->
+                
+
+            <!-- Default job items (static) -->
+            <li class="job-item" onclick="toggleDetails(event)">
+                <strong>Retail Associate</strong>
+                <div class="job-details">
+                    <p><strong>Description:</strong> Assist customers, stock shelves, and organize displays in a retail setting.</p>
+                    <p><strong>Salary:</strong> $15/hour</p>
+                    <p><strong>Location:</strong> Autozone</p>
+                </div>
+            </li>
+            <li class="job-item" onclick="toggleDetails(event)">
+                <strong>Fast Food Crew Member</strong>
+                <div class="job-details">
+                    <p><strong>Description:</strong> Take customer orders, prepare food, and maintain cleanliness in a fast-food restaurant.</p>
+                    <p><strong>Salary:</strong> $15/hour</p>
+                    <p><strong>Location:</strong> Burger King</p>
+                </div>
+            </li>
+            <li class="job-item" onclick="toggleDetails(event)">
+                <strong>Lifeguard</strong>
+                <div class="job-details">
+                    <p><strong>Description:</strong> Ensure the safety of swimmers, enforce pool rules, and provide emergency response if needed.</p>
+                    <p><strong>Salary:</strong> $17/hour</p>
+                    <p><strong>Location:</strong> YMCA</p>
+                </div>
+            </li>
+            <li class="job-item" onclick="toggleDetails(event)">
+                <strong>Librarian</strong>
+                <div class="job-details">
+                    <p><strong>Description:</strong> Assist customers, stock shelves, and organize displays in a retail setting.</p>
+                    <p><strong>Salary:</strong> $12/hour</p>
+                    <p><strong>Location:</strong> Frederick County Public Library</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
